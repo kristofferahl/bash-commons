@@ -50,3 +50,9 @@ source path/to/module-name.sh
 ```bash
 ./run test-docker
 ```
+
+---
+
+## Roadmap
+- Support for logging to stdout or stderr
+- More modules
