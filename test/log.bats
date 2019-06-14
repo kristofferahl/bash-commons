@@ -69,7 +69,7 @@ export LOG_LEVEL='TRACE'
   export LOG_FORMAT='<ts_utc>'
   run log_error "foo"
   assert_success
-  assert_output_equals "$(date -u --iso-8601=seconds)"
+  assert_output_equals "$(date -u -Iseconds)"
 }
 
 @test "LOG_FORMAT : given script, should output expected" {

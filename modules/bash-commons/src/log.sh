@@ -37,7 +37,7 @@ log() {
   if [[ ${user_level_index} -ge ${default_level_index} || ${user_level_index} == '' ]]; then
     local -r ts="$(date +"%Y-%m-%d %H:%M:%S")"
     # shellcheck disable=SC2034
-    local -r ts_utc="$(date -u --iso-8601=seconds)"
+    local -r ts_utc="$(date -u -Iseconds)"
     # shellcheck disable=SC2034
     local -r ts_since="$(printf "%05g" $((($(date +%s%N) - ${LOG_SOURCED_TS:?}) / 1000000)))"
     # shellcheck disable=SC2034
