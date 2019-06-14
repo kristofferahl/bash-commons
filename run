@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+
+declare -r test_dir="${PWD:?}/test"
+declare -r examples_dir="${PWD:?}/examples"
+
+run_help() {
+  echo "usage: ./run <command> [<arg1> <arg2> ...]
+
+commands:
+  example        Run examples
+  test           Run tests
+  test-docker    Run tests in docker"
+}
+
+run_examples() {
+  # shellcheck source=/dev/null
+  source "${PWD:?}/modules/bash-commons/src/log.sh"
+
+  for x in ${examples_dir:?}/log/*; do
+    echo "Executing sample: $x"
+    echo '------------------------------------------------------------------------------------------------------------------------'
+    if [[ -f "$x" ]]; then
+      # shellcheck source=/dev/null
+      source "$x"
+    fi
+    echo
+    echo
+  done
+}
+
+run_test() {
+  local -a tests=()
+  for x in ${test_dir:?}; do
+    if [[ -d "$x" ]]; then
+      echo "Adding '$x' tests to testrun"
+      tests+=("$x")
+    fi
+  done
+  echo 'Running tests...'
+  echo
+  bats -p ${tests[*]}
+}
+
+run_test_docker() {
+  local -a versions=('3.2.57' '4.0.44' '4.3.48' '4.4.23' '5.0.7')
+  local current_dir="${PWD:?}:/work"
+
+  for v in "${versions[@]}"; do
+    echo && echo
+    docker build -t "bash:$v-bats" --build-arg "BASH_VERSION=$v" -f ./test/Dockerfile .
+
+    echo && echo "Testing in bash $v"
+    echo '------------------------------------------------------------------------------------------------------------------------'
+    docker run --rm -it -v "${current_dir:?}" "bash:$v-bats" bash -c "cd /work/ && ./run test"
+
+    if [[ "$?" != "0" && ${DEBUG} == true ]]; then
+      docker run --rm -it -v "${current_dir}" "bash:$v" bash
+    fi
+  done
+}
+
+main() {
+  local command="${1}"
+  shift
+
+  case "${command}" in
+    test) run_test "$@" ;;
+    test-docker) run_test_docker "$@" ;;
+    examples) run_examples "$@" ;;
+    *) run_help ;;
+
+  esac
+
+}
+
+main "$@"
