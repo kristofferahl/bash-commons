@@ -11,17 +11,15 @@ LOG_COLOR_OFF=${LOG_COLOR_OFF:-false}
 LOG_FORMAT="${LOG_FORMAT:-[<ts>] [<script>] <color_start>[<level>]<color_end> <message>}"
 
 # shellcheck disable=SC1117
+export LOG_COLOR_TRACE="\033[0;90m"
+# shellcheck disable=SC1117
 export LOG_COLOR_DEBUG=''
 # shellcheck disable=SC1117
 export LOG_COLOR_INFO="\033[1;94m"
 # shellcheck disable=SC1117
-export LOG_COLOR_SUCCESS="\033[1;92m"
-# shellcheck disable=SC1117
-export LOG_COLOR_ERROR="\033[0;91m"
-# shellcheck disable=SC1117
 export LOG_COLOR_WARN="\033[0;93m"
 # shellcheck disable=SC1117
-export LOG_COLOR_TRACE="\033[0;90m"
+export LOG_COLOR_ERROR="\033[0;91m"
 
 log() {
   local -r level="${1:?}"
