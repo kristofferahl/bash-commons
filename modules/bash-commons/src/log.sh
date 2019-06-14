@@ -41,7 +41,7 @@ log() {
     # shellcheck disable=SC2034
     local -r ts_since="$(printf "%05g" $((($(date +%s%N) - ${LOG_SOURCED_TS:?}) / 1000000)))"
     # shellcheck disable=SC2034
-    local -r level_short="${level:0:3}"
+    local -r level_short="${level:0:4}"
     local -r script="$(basename "${BASH_SOURCE[2]:-$0}")"
     local -r color="LOG_COLOR_${level:?}"
     local color_start="${!color}"

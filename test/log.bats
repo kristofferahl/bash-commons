@@ -48,7 +48,7 @@ export LOG_LEVEL='TRACE'
   export LOG_FORMAT='<level_short>'
   run log_error "foo"
   assert_success
-  assert_output_equals "ERR"
+  assert_output_equals "ERRO"
 }
 
 @test "LOG_FORMAT : given message, should output expected" {
