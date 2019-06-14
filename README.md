@@ -23,12 +23,12 @@ See examples/log for more info.
 
 At this point, simply curl it...
 ```bash
-curl --silent https://raw.githubusercontent.com/kristofferahl/bash-commons/master/modules/bash-commons/src/module-name.sh
+curl --silent https://raw.githubusercontent.com/kristofferahl/bash-commons/master/modules/bash-commons/src/module-name.sh -o path/to/module-name.sh
 ```
 
 ## Usage
 ```bash
-source path/to/module.sh
+source path/to/module-name.sh
 ```
 
 ---
