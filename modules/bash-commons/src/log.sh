@@ -6,7 +6,7 @@ export LOG_COLOR_OFF
 export LOG_FORMAT
 
 LOG_SOURCED_TS=$(date +%s%N)
-LOG_LEVEL='DEBUG'
+LOG_LEVEL="${LOG_LEVEL:-DEBUG}"
 LOG_COLOR_OFF=${LOG_COLOR_OFF:-false}
 LOG_FORMAT="${LOG_FORMAT:-[<ts>] [<script>] <color_start>[<level>]<color_end> <message>}"
 
