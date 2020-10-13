@@ -51,7 +51,7 @@ assert_output_equals() {
   else
     expected="$1"
   fi
-  assert_equal "$expected" "${output}"
+  assert_equal "${expected}" "${output}"
 }
 
 assert_output_contains() {
@@ -61,5 +61,5 @@ assert_output_contains() {
   else
     expected="$1"
   fi
-  assert_contains "$expected" "${output}"
+  assert_contains "${expected}" "${output}"
 }

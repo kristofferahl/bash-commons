@@ -72,6 +72,15 @@ export LOG_LEVEL='TRACE'
   assert_output_equals "$(date -u -Iseconds)"
 }
 
+@test "LOG_FORMAT : given ts_since, should output expected" {
+  export LOG_FORMAT='<ts_since>'
+  local sleep_seconds=3
+  sleep ${sleep_seconds:?} # Used to simulate time since loading the log script
+  run log_error "foo"
+  assert_success
+  assert_output_equals "000${sleep_seconds:?}"
+}
+
 @test "LOG_FORMAT : given script, should output expected" {
   export LOG_FORMAT='<script>'
   run log_error "foo"

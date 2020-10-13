@@ -5,7 +5,7 @@ export LOG_LEVEL
 export LOG_COLOR_OFF
 export LOG_FORMAT
 
-LOG_SOURCED_TS=$(date +%s%N)
+LOG_SOURCED_TS=$(date +%s)
 LOG_LEVEL="${LOG_LEVEL:-DEBUG}"
 LOG_COLOR_OFF=${LOG_COLOR_OFF:-false}
 LOG_FORMAT="${LOG_FORMAT:-[<ts>] [<script>] <color_start>[<level>]<color_end> <message>}"
@@ -37,7 +37,7 @@ log() {
     # shellcheck disable=SC2034
     local -r ts_utc="$(date -u -Iseconds)"
     # shellcheck disable=SC2034
-    local -r ts_since="$(printf "%04g" $((($(date +%s%N) - ${LOG_SOURCED_TS:?}) / 1000000)))"
+    local -r ts_since="$(printf "%04g" $(($(date +%s) - ${LOG_SOURCED_TS:?})))"
     # shellcheck disable=SC2034
     local -r level_short="${level:0:4}"
     local -r script="$(basename "${BASH_SOURCE[2]:-$0}")"
