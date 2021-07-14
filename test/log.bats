@@ -1,6 +1,7 @@
 #!/usr/bin/env bats
 
 # shellcheck source=/dev/null
+source "${BATS_TEST_DIRNAME:?}/../modules/bash-commons/src/bootstrap.sh"
 source "${BATS_TEST_DIRNAME:?}/../modules/bash-commons/src/log.sh"
 source "${BATS_TEST_DIRNAME:?}/helper.sh"
 

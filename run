@@ -14,6 +14,8 @@ commands:
 
 run_examples() {
   # shellcheck source=/dev/null
+  source "${PWD:?}/modules/bash-commons/src/bootstrap.sh"
+  # shellcheck source=/dev/null
   source "${PWD:?}/modules/bash-commons/src/log.sh"
 
   for x in ${examples_dir:?}/log/*; do
