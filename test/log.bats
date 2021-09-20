@@ -58,6 +58,13 @@ export LOG_LEVEL='TRACE'
   assert_output_equals "foo"
 }
 
+@test "LOG_FORMAT : given message containing format keys, should output expected" {
+  export LOG_FORMAT='<message>'
+  run log_error 'this is a string containing format keys' 'ts_utc' 'ts_since' 'ts' 'level_short' 'level' 'script' 'color_start' 'color_end' 'message'
+  assert_success
+  assert_output_equals "this is a string containing format keys ts_utc ts_since ts level_short level script color_start color_end message"
+}
+
 @test "LOG_FORMAT : given ts, should output expected" {
   export LOG_FORMAT='<ts>'
   run log_error "foo"
@@ -85,7 +92,7 @@ export LOG_LEVEL='TRACE'
   export LOG_FORMAT='<script>'
   run log_error "foo"
   assert_success
-  assert_output_equals "bats-exec-test"
+  assert_output_equals "bats-exec-test" || assert_output_equals "test_functions.bash"
 }
 
 @test "LOG_LEVEL : given info, should output expected" {

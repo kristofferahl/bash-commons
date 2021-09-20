@@ -49,9 +49,13 @@ log() {
     local formatted="${LOG_FORMAT:?}"
     for key in ${format_keys[*]}; do
       local key_regex="(.*)\\<${key}\\>(.*)"
-      while [[ $formatted =~ $key_regex ]]; do
+      if [[ "${key:?}" == 'message' ]]; then
         formatted="${formatted/<${key}>/${!key}}"
-      done
+      else
+        while [[ $formatted =~ $key_regex ]]; do
+          formatted="${formatted/<${key}>/${!key}}"
+        done
+      fi
     done
 
     echo -e "${color_end}${formatted:?}${color_end}"
